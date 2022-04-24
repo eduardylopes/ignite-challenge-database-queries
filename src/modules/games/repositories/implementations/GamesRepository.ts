@@ -14,7 +14,7 @@ export class GamesRepository implements IGamesRepository {
 
   async findByTitleContaining(param: string): Promise<Game[]> {
     return await this.repository
-      .createQueryBuilder("user")
+      .createQueryBuilder("games")
       .where("games.title ilike :title", { title: `%${param}%` })
       .getMany();
   }
@@ -26,7 +26,7 @@ export class GamesRepository implements IGamesRepository {
   async findUsersByGameId(id: string): Promise<User[]> {
     return await this.repository
       .createQueryBuilder()
-      .relation(User, "games")
+      .relation(Game, "users")
       .of(id)
       .loadMany();
   }
