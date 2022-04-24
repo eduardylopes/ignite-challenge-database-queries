@@ -18,8 +18,8 @@ export class UsersRepository implements IUsersRepository {
     return await this.repository
     .createQueryBuilder("users")
     .leftJoinAndSelect("user.games", "games")
-    .where("user.id = :id", { id: user_id })
-    .getRawOne()
+    .where("user.game.id = :id", { id: user_id })
+    .getRawOne();
   }
 
   async findAllUsersOrderedByFirstName(): Promise<User[]> {
