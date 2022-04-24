@@ -17,7 +17,7 @@ export class UsersRepository implements IUsersRepository {
   }: IFindUserWithGamesDTO): Promise<User> {
     return await this.repository
     .createQueryBuilder("users")
-    .leftJoinAndSelect("user.games", "games")
+    .leftJoinAndSelect("user.games", "game")
     .where("user.id = :id", { id: user_id })
     .getRawOne();
   }
